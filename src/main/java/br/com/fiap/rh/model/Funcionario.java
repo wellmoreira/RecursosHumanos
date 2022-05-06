@@ -6,8 +6,9 @@ import java.time.LocalDate;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,15 +25,13 @@ import lombok.ToString;
 public class Funcionario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue	
 	private Long id;
 
-	@Embedded private DadosPessoais dadosPessoais;// utilizacao de composição e nao heranca (Liskov)
+	@Embedded 
+	private DadosPessoais dadosPessoais;// utilizacao de composição e nao heranca (Liskov)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate dataUltimoReajuste = LocalDate.now().minusMonths(7);
-
-	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario) {
-		this.dadosPessoais = new DadosPessoais( nome, cpf, cargo, salario);
-	}
 
 	public void atualizarSalario(BigDecimal novoSalario) {
 		this.dadosPessoais.setSalario(novoSalario);

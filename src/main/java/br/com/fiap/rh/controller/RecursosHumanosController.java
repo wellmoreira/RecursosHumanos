@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.fiap.rh.model.Cargo;
 import br.com.fiap.rh.model.Funcionario;
+import br.com.fiap.rh.repository.FuncionarioRepository;
 import br.com.fiap.rh.service.promocao.PromocaoService;
 import br.com.fiap.rh.service.reajuste.ReajusteService;
 import br.com.fiap.rh.service.reajuste.ValidacaoPercentualReajuste;
@@ -41,6 +43,8 @@ public class RecursosHumanosController {
 	 * manutenção no seu código.
 	 */
 	
+	@Autowired
+	FuncionarioRepository funcionarioRepository;
 	
 	private ReajusteService reajusteService;
 
@@ -61,21 +65,20 @@ public class RecursosHumanosController {
 		return "Hello worldiiiiiiiiii";
 	}
 
-	@GetMapping("/reajusteSalarial")
-	public ResponseEntity<Boolean> reajusteSalarial() throws JsonProcessingException {
+	@PostMapping("/reajusteSalarial")
+	public ResponseEntity<Funcionario> reajusteSalarial(@RequestBody Funcionario func) throws JsonProcessingException {
 		list.add(validacaoPercentualReajuste);
 		list.add(validacaoPeriodicidadeEntreReajustes);
 
-		reajusteService = new ReajusteService(list);
-		boolean retorno = reajusteService.reajustarSalarioDoFuncionario(
-				new Funcionario("Fulano", "Silva", Cargo.ANALISTA, BigDecimal.TEN), BigDecimal.ONE);
+		reajusteService = new ReajusteService(list,funcionarioRepository);
+		Funcionario retorno = reajusteService.reajustarSalarioDoFuncionario(func, BigDecimal.ONE);
 
 		return new ResponseEntity<>(retorno, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/promocao")
-	public ResponseEntity<Boolean> promocao() throws JsonProcessingException {
-		boolean retorno = promocaoService.promover(new Funcionario("Fulano", "Silva", Cargo.ANALISTA, BigDecimal.ONE),	true);
+	@PostMapping("/promocao")
+	public ResponseEntity<Funcionario> promocao(@RequestBody Funcionario func) throws JsonProcessingException {
+		Funcionario retorno = promocaoService.promover(func, true);
 
 		return new ResponseEntity<>(retorno, HttpStatus.CREATED);
 	}

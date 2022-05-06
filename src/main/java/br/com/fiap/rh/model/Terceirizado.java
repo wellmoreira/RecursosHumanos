@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.NoArgsConstructor;
@@ -21,10 +20,11 @@ public class Terceirizado {//parece funcionario tem gosto de funcionario mas nao
 	// nao usamos heranca pois alguns dados de funcionario nao fazem sentido estarem na classe terceirizado ex: promocao e reajuste 
 	// utilizamos composição em ambas classes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long id;
 	
-	@Embedded DadosPessoais dadosPessoais;// utilizacao de composição e nao heranca (Liskov)
+	@Embedded 
+	DadosPessoais dadosPessoais;// utilizacao de composição e nao heranca (Liskov)
 	private String empresa;
 
 	public Terceirizado(String nome, String cpf, Cargo cargo, BigDecimal salario, String empresa) {
