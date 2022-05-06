@@ -1,0 +1,10 @@
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+  application:
+    name: fiap- 81 AOJ 
+
+#utilizada para implementacao do pattern de observability (Distributed tracing) de arquiterura de microservicos
