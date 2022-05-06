@@ -3,7 +3,7 @@ package br.com.fiap.rh.service.tributacao;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Anuenio implements Reajuste {
+public class Anuenio implements Reajuste {// principio de segregacao de interfaces
 
 	private BigDecimal valor;
 	private LocalDate data;

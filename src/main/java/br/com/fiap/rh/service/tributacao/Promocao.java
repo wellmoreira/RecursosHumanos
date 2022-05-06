@@ -3,7 +3,7 @@ package br.com.fiap.rh.service.tributacao;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Promocao implements ReajusteTributavel {
+public class Promocao implements ReajusteTributavel {// principio de segregacao de interfaces 
 
 	private BigDecimal valor;
 	private LocalDate data;
@@ -24,7 +24,7 @@ public class Promocao implements ReajusteTributavel {
 	}
 	
 	@Override
-	public BigDecimal valorImpostoDeRenda() {
+	public BigDecimal valorImpostoDeRenda() {// principio de segregacao de interfaces
 		return valor.multiply(new BigDecimal("0.1"));
 	}
 

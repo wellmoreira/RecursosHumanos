@@ -18,10 +18,9 @@ public class ReajusteService {
 	
 	//embora reajuste e salário estejam relacionados com o funcionário, aqui eu tenho algo que já está além disso que é o cálculo do reajuste, a validação de reajuste de salário
 	//Pode ser que amanhã mude esse percentual, pode ser que tenham novas regras em razao disto esse trecho de código estar isolado na classe service.
-	
 	public boolean reajustarSalarioDoFuncionario(Funcionario funcionario, BigDecimal aumento) {
 		
-		// abstração das validações (open closed )
+		// abstração das validações aplicando o principio de  open closed e inversao de dependencia
 		this.validacoes.forEach(v -> v.validar(funcionario, aumento));
 		
 		// garantindo a coesao e a Single Responsibility Principle

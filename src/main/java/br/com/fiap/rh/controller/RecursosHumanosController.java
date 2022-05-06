@@ -24,7 +24,24 @@ import br.com.fiap.rh.service.reajuste.ValidacaoReajuste;
 
 @RestController
 public class RecursosHumanosController {
-
+	
+	/*
+	 * princípio da responsabilidade única, o princípio aberto e fechado e o
+	 * princípio da substituição de Liskov e o princípio da segregação de interface
+	 * e o princípio da inversão de dependências. Então cada um desses princípios
+	 * formam o SOLID que são princípios focados em boas práticas de programação e
+	 * de orientação a objetos.
+	 * 
+	 * 
+	 * SOLID visa escrever um código que é fácil de manter e principalmente fácil de estender,
+	 * de adicionar novas características, novos comportamentos, novas
+	 * funcionalidades com um menor impacto possível.
+	 * 
+	 * Então esses princípios visam justamente simplificar esse processo de
+	 * manutenção no seu código.
+	 */
+	
+	
 	private ReajusteService reajusteService;
 
 	private List<ValidacaoReajuste> list = new ArrayList<ValidacaoReajuste>();
